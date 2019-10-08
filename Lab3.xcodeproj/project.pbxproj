@@ -13,6 +13,7 @@
 		827B9DE8234D1CEB00F22E3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 827B9DE6234D1CEB00F22E3A /* Main.storyboard */; };
 		827B9DEA234D1CED00F22E3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 827B9DE9234D1CED00F22E3A /* Assets.xcassets */; };
 		827B9DED234D1CED00F22E3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 827B9DEB234D1CED00F22E3A /* LaunchScreen.storyboard */; };
+		827B9DF5234D315000F22E3A /* gameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827B9DF4234D315000F22E3A /* gameViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		827B9DE9234D1CED00F22E3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		827B9DEC234D1CED00F22E3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		827B9DEE234D1CED00F22E3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		827B9DF4234D315000F22E3A /* gameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				827B9DE0234D1CEA00F22E3A /* AppDelegate.swift */,
 				827B9DE2234D1CEA00F22E3A /* SceneDelegate.swift */,
 				827B9DE4234D1CEA00F22E3A /* ViewController.swift */,
+				827B9DF4234D315000F22E3A /* gameViewController.swift */,
 				827B9DE6234D1CEB00F22E3A /* Main.storyboard */,
 				827B9DE9234D1CED00F22E3A /* Assets.xcassets */,
 				827B9DEB234D1CED00F22E3A /* LaunchScreen.storyboard */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				827B9DF5234D315000F22E3A /* gameViewController.swift in Sources */,
 				827B9DE5234D1CEB00F22E3A /* ViewController.swift in Sources */,
 				827B9DE1234D1CEA00F22E3A /* AppDelegate.swift in Sources */,
 				827B9DE3234D1CEA00F22E3A /* SceneDelegate.swift in Sources */,
