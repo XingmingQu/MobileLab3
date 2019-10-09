@@ -23,7 +23,8 @@ class ViewController: UIViewController {
     lazy var numStepsYesterday = 0
     lazy var goalSteps = 0
     
-    
+    //---------All the  CM things -------------
+    let pedometer = CMPedometer()
     let activityManager = CMMotionActivityManager()
     let customQueue = OperationQueue()
     
@@ -31,13 +32,26 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         //        self.goalAchievedStack.isHidden=true
         
-        if CMMotionActivityManager.isActivityAvailable(){ self.activityManager.startActivityUpdates(to: customQueue) { (activity:CMMotionActivity?) -> Void in NSLog("%@",activity!.description)
+        // set up the montion activity
+        if CMMotionActivityManager.isActivityAvailable(){ self.activityManager.startActivityUpdates(to: customQueue) { (activity:CMMotionActivity?) -> Void in
+            //            NSLog("%@",activity!.description)
             self.Activity = self.getActivity(activity: activity!)
-            NSLog("%@",self.Activity)
-            NSLog("%@","Current activity: "+self.Activity)
+            //            NSLog("%@",self.Activity)
+            //            NSLog("%@","Current activity: "+self.Activity)
             DispatchQueue.main.async{
                 self.activityLabel.text="Current activity: "+self.Activity
             }
+            }
+        }
+        
+        // set up the pedometer
+        if CMPedometer.isStepCountingAvailable() {
+            self.pedometer.startUpdates(from: Date()) {
+                (pedData: CMPedometerData?, error: Error?) -> Void in
+                NSLog("%@",pedData!.numberOfSteps)
+                DispatchQueue.main.async{
+                    self.todayStepLabel.text="Steps of Today: "+String(pedData!.numberOfSteps.intValue)
+                }
             }
         }
         
@@ -54,14 +68,14 @@ class ViewController: UIViewController {
         if activity.walking {
             return "Walking"
         }
-        else if activity.automotive {
-            return "Driving"
+        else if activity.running {
+            return "Running"
         }
         else if activity.cycling {
             return "Cycling"
         }
-        else if activity.running {
-            return "Running"
+        else if activity.automotive {
+            return "Driving"
         }
         else if activity.stationary {
             return "Stationary"
