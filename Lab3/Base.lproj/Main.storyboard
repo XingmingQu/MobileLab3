@@ -64,7 +64,7 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5000" minValue="0.0" maxValue="40000" translatesAutoresizingMaskIntoConstraints="NO" id="WRG-VM-F4h">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5000" minValue="0.0" maxValue="15000" translatesAutoresizingMaskIntoConstraints="NO" id="WRG-VM-F4h">
                                 <rect key="frame" x="18" y="561.66666666666663" width="339" height="31"/>
                                 <connections>
                                     <action selector="sliderValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="KKT-rq-dQd"/>
@@ -112,6 +112,7 @@
                     <connections>
                         <outlet property="activityLabel" destination="MUl-b6-J3Y" id="62Y-eb-YiO"/>
                         <outlet property="goalAchievedStack" destination="AlO-g9-MYS" id="wTT-qY-naB"/>
+                        <outlet property="goalSlider" destination="WRG-VM-F4h" id="ld2-iF-CPt"/>
                         <outlet property="goalStepLabel" destination="ydZ-4C-LG8" id="eil-Zk-D0b"/>
                         <outlet property="todayStepLabel" destination="TfA-ER-8Bg" id="49H-qv-Bbp"/>
                         <outlet property="yesterdayStepLabel" destination="ZOe-Ib-8xB" id="ISC-Z4-Aia"/>

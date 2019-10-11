@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var activityLabel: UILabel!
     @IBOutlet weak var goalStepLabel: UILabel!
     @IBOutlet weak var goalAchievedStack: UIStackView!
+    @IBOutlet weak var goalSlider: UISlider!
     
     // --------All the lazy vars---------
     lazy var Activity = ""
@@ -30,33 +31,53 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        self.goalAchievedStack.isHidden=true
+        self.goalAchievedStack.isHidden=true
+        
         
         // set up the montion activity
-        if CMMotionActivityManager.isActivityAvailable(){ self.activityManager.startActivityUpdates(to: customQueue) { (activity:CMMotionActivity?) -> Void in
-            //            NSLog("%@",activity!.description)
+        if CMMotionActivityManager.isActivityAvailable()
+        {
+            self.activityManager.startActivityUpdates(to: customQueue) { (activity:CMMotionActivity?) -> Void in
             self.Activity = self.getActivity(activity: activity!)
-            //            NSLog("%@",self.Activity)
-            //            NSLog("%@","Current activity: "+self.Activity)
-            DispatchQueue.main.async{
-                self.activityLabel.text="Current activity: "+self.Activity
-            }
-            }
-        }
-        
-        // set up the pedometer
-        if CMPedometer.isStepCountingAvailable() {
-            self.pedometer.startUpdates(from: Date()) {
-                (pedData: CMPedometerData?, error: Error?) -> Void in
-                NSLog("%@",pedData!.numberOfSteps)
-                DispatchQueue.main.async{
-                    self.todayStepLabel.text="Steps of Today: "+String(pedData!.numberOfSteps.intValue)
+            DispatchQueue.main.async{ self.activityLabel.text="Current activity: "+self.Activity
                 }
             }
         }
         
+        // //get today's step
+        let today = Date()
+        var beginingOfTheDay = Calendar.current.startOfDay(for: today)
+//        beginingOfTheDay  Calendar.current.startOfDay(for: now)
+        if CMPedometer.isStepCountingAvailable() {
+            self.pedometer.startUpdates(from: Date()) {
+                (pedData: CMPedometerData?, error: Error?) -> Void in
+                DispatchQueue.main.async{
+                    self.todayStepLabel.text="Steps of Today: "+String(pedData!.numberOfSteps.intValue)
+                    if(pedData!.numberOfSteps.intValue>Int(self.goalSlider.value)){
+                        self.goalAchievedStack.isHidden=false
+                    }
+                    else{
+                        self.goalAchievedStack.isHidden=true
+                    }
+                }
+            }
+        }
         
+        //get yesterday's step
         
+        let now = Date()
+        
+        let fromPrevious = now.addingTimeInterval(-60*60*24)
+        self.pedometer.queryPedometerData(from: fromPrevious, to: now) {
+            (pedData: CMPedometerData?, error: Error?) -> Void in
+            self.numStepsYesterday = pedData!.numberOfSteps.intValue
+            DispatchQueue.main.async{
+                self.yesterdayStepLabel.text="Steps of Yesterday: "+String(self.numStepsYesterday)
+            }
+        }
+        
+
+  
     }
     
     @IBAction func sliderValueChanged(_ sender: UISlider) {
