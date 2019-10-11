@@ -44,12 +44,13 @@ class ViewController: UIViewController {
             }
         }
         
-        // //get today's step
-        let today = Date()
-        var beginingOfTheDay = Calendar.current.startOfDay(for: today)
+        //get today's step
+        let now = Date()
+        //so we want to get the data from today 00:00
+        let beginingOfTheDay = Calendar.current.startOfDay(for: now)
 //        beginingOfTheDay  Calendar.current.startOfDay(for: now)
         if CMPedometer.isStepCountingAvailable() {
-            self.pedometer.startUpdates(from: Date()) {
+            self.pedometer.startUpdates(from:beginingOfTheDay) {
                 (pedData: CMPedometerData?, error: Error?) -> Void in
                 DispatchQueue.main.async{
                     self.todayStepLabel.text="Steps of Today: "+String(pedData!.numberOfSteps.intValue)
@@ -64,11 +65,8 @@ class ViewController: UIViewController {
         }
         
         //get yesterday's step
-        
-        let now = Date()
-        
-        let fromPrevious = now.addingTimeInterval(-60*60*24)
-        self.pedometer.queryPedometerData(from: fromPrevious, to: now) {
+        let fromPrevious = beginingOfTheDay.addingTimeInterval(-60*60*24)
+        self.pedometer.queryPedometerData(from: fromPrevious, to: beginingOfTheDay) {
             (pedData: CMPedometerData?, error: Error?) -> Void in
             self.numStepsYesterday = pedData!.numberOfSteps.intValue
             DispatchQueue.main.async{
@@ -76,8 +74,6 @@ class ViewController: UIViewController {
             }
         }
         
-
-  
     }
     
     @IBAction func sliderValueChanged(_ sender: UISlider) {
@@ -103,7 +99,5 @@ class ViewController: UIViewController {
         }
         return "Unknown"
     }
-    
-    
 }
 
