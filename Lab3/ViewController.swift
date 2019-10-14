@@ -7,7 +7,7 @@
 //
 import CoreMotion
 import UIKit
-
+import SpriteKit
 class ViewController: UIViewController {
     
     // --------All the labels---------
@@ -56,6 +56,12 @@ class ViewController: UIViewController {
                     self.todayStepLabel.text="Steps of Today: "+String(pedData!.numberOfSteps.intValue)
                     if(pedData!.numberOfSteps.intValue>Int(self.goalSlider.value)){
                         self.goalAchievedStack.isHidden=false
+                        
+                        //Let's create the modal game view controller
+                        let gameVC = GameViewController()
+                        gameVC.view = SKView(frame: CGRect(x: 0, y: 0, width: 750, height: 1334))
+                        gameVC.transitioningDelegate = self as? UIViewControllerTransitioningDelegate
+                        self.present(gameVC, animated: true, completion: nil)
                     }
                     else{
                         self.goalAchievedStack.isHidden=true

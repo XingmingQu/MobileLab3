@@ -1,30 +1,60 @@
 //
-//  gameViewController.swift
-//  Lab3
+//  GameViewController.swift
+//  mazeGame
 //
-//  Created by Xingming on 10/8/19.
-//  Copyright © 2019 Southern Methodist University. All rights reserved.
+//  Created by Ketan Jogalekar on 10/11/19.
+//  Copyright © 2019 Siddhika Ghaisas. All rights reserved.
 //
 
 import UIKit
+import SpriteKit
+import GameplayKit
 
-class gameViewController: UIViewController {
+class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
+        // including entities and graphs.
+        if let scene = GKScene(fileNamed: "GameScene") {
+            
+            // Get the SKScene from the loaded GKScene
+            if let sceneNode = scene.rootNode as! GameScene? {
+                
+                // Copy gameplay related content over to the scene
+                sceneNode.entities = scene.entities
+                sceneNode.graphs = scene.graphs
+                
+                // Set the scale mode to scale to fit the window
+                sceneNode.scaleMode = .aspectFill
+                
+                // Present the scene
+                if let view = self.view as! SKView? {
+                    view.presentScene(sceneNode)
+                    
+                    view.ignoresSiblingOrder = true
+                    
+                    view.showsFPS = true
+                    view.showsNodeCount = true
+                }
+            }
+        }
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override var shouldAutorotate: Bool {
+        return true
     }
-    */
 
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return .allButUpsideDown
+        } else {
+            return .all
+        }
+    }
+
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 }
