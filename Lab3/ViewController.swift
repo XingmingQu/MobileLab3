@@ -29,6 +29,8 @@ class ViewController: UIViewController {
     let activityManager = CMMotionActivityManager()
     let customQueue = OperationQueue()
     
+    private var isModalDialogueCreated = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.goalAchievedStack.isHidden=true
@@ -58,10 +60,16 @@ class ViewController: UIViewController {
                         self.goalAchievedStack.isHidden=false
                         
                         //Let's create the modal game view controller
-                        let gameVC = GameViewController()
-                        gameVC.view = SKView(frame: CGRect(x: 0, y: 0, width: 750, height: 1334))
-                        gameVC.transitioningDelegate = self as? UIViewControllerTransitioningDelegate
-                        self.present(gameVC, animated: true, completion: nil)
+                        if(self.isModalDialogueCreated == false)
+                        {
+                            let gameVC = GameViewController()
+                            gameVC.view = SKView(frame: CGRect(x: 0, y: 0, width: 750, height: 1334))
+                            gameVC.transitioningDelegate = self as? UIViewControllerTransitioningDelegate
+                            self.present(gameVC, animated: true, completion: nil)
+                            gameVC.view.isHidden = false
+                            self.isModalDialogueCreated = true
+                        }
+                        
                     }
                     else{
                         self.goalAchievedStack.isHidden=true
