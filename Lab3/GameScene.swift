@@ -123,6 +123,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             marble.physicsBody?.categoryBitMask = 0x00000001
 
             self.addChild(marble)
+            timeLeft = 30
+            timerLabel.text = String(timeLeft)
             
             //Retstart the 30 seconds timer after adding new marble
             timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
@@ -137,9 +139,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         {
             //A new marble can be added with touch, only when player
             //has won the previous game
-            if(self.childNode(withName: "marble") == nil)
+            if(gameWon == true && self.childNode(withName: "marble") == nil)
             {
+                gameWonLabel.isHidden = true
                 addMarble()
+                gameWon = false
             }
         }
     }
@@ -153,9 +157,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             timer = nil
             if(lives > 0)
             {
-                lives -= 1
-                //Update the lives label
-                livesLabel.text = String(lives)
+                if(gameWon == false)
+                {
+                    lives -= 1
+                    //Update the lives label
+                    livesLabel.text = String(lives)
+                }
             }
             else
             {
