@@ -31,7 +31,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var timer:Timer?
     var timeLeft = 30
     var lives = 2
- 
+    var gameWon = false
+    
     override func didMove(to view: SKView) {
         //Update the core motion manager, so it starts updating data immediately
         physicsWorld.contactDelegate = self
@@ -56,6 +57,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         livesLabel = self.childNode(withName: "lives") as! SKLabelNode
         livesLabel.text = String(lives)
         
+        gameWon = false
+        
         manager.startAccelerometerUpdates()
         //Grab data every 10th of a second
         manager.accelerometerUpdateInterval = 0.1
@@ -70,7 +73,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         let playerBody = contact.bodyA
         let blackHoleBody = contact.bodyB
         
-        //yeay.. Endgame!!!!!
         if playerBody.node?.name == "blackHole" ||
             blackHoleBody.node?.name == "blackHole"
         {
@@ -85,6 +87,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             }
             //Display the game won text label
             gameWonLabel.isHidden = false
+            gameWon = true
         }
     }
     override func update(_ currentTime: TimeInterval) {
@@ -111,7 +114,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             //Create a new marble SKSpriteNode
             marble = SKSpriteNode(imageNamed: "marble")
             marble.size = CGSize(width:50,height:50)
-            marble.position = CGPoint(x:-280, y:-550)
+            marble.position = CGPoint(x:-250, y:-500)
             marble.physicsBody = SKPhysicsBody(circleOfRadius: 25)
             marble.physicsBody?.restitution = CGFloat(0.2)
             marble.physicsBody?.isDynamic = true
@@ -156,13 +159,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             }
             else
             {
-                //0 lives, the game is over
-                //Get rid of the marble to stop the game then and there
-                marble.removeFromParent()
-                //Display the game over lable
-                gameOverLabel.isHidden = false
-                //Stop the accelerometer
-                manager.stopAccelerometerUpdates()
+                //Make sure that if the game is won at the last second
+                if(gameWon == false)
+                {
+                    //0 lives, the game is over
+                    //Get rid of the marble to stop the game then and there
+                    marble.removeFromParent()
+                    //Display the game over lable
+                    gameOverLabel.isHidden = false
+                    //Stop the accelerometer
+                    manager.stopAccelerometerUpdates()
+                }
             }
         }
     }

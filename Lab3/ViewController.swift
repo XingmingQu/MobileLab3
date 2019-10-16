@@ -59,17 +59,6 @@ class ViewController: UIViewController {
                     if(pedData!.numberOfSteps.intValue>Int(self.goalSlider.value)){
                         self.goalAchievedStack.isHidden=false
                         
-                        //Let's create the modal game view controller
-                        if(self.isModalDialogueCreated == false)
-                        {
-                            let gameVC = GameViewController()
-                            gameVC.view = SKView(frame: CGRect(x: 0, y: 0, width: 750, height: 1334))
-                            gameVC.transitioningDelegate = self as? UIViewControllerTransitioningDelegate
-                            self.present(gameVC, animated: true, completion: nil)
-                            gameVC.view.isHidden = false
-                            self.isModalDialogueCreated = true
-                        }
-                        
                     }
                     else{
                         self.goalAchievedStack.isHidden=true

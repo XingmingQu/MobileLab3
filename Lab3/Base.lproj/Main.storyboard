@@ -84,7 +84,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                         <state key="normal" title="Play a game"/>
                                         <connections>
-                                            <segue destination="NoK-ap-aeE" kind="show" id="648-WE-tC7"/>
+                                            <segue destination="NoK-ap-aeE" kind="show" id="6qx-YN-ydk"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -122,11 +122,11 @@
             </objects>
             <point key="canvasLocation" x="-58.399999999999999" y="126.35467980295567"/>
         </scene>
-        <!--Game View Controller-->
+        <!--GameViewController-->
         <scene sceneID="xP0-rW-zop">
             <objects>
-                <viewController id="NoK-ap-aeE" customClass="gameViewController" customModule="Lab3" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="cUV-Jn-zdu">
+                <viewController id="NoK-ap-aeE" userLabel="GameViewController" customClass="GameViewController" customModule="Lab3" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cUV-Jn-zdu" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
