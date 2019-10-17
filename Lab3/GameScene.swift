@@ -186,7 +186,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             if (gameWon == true)
             {
                 timer?.invalidate()
-                print("asdadwdwad")
             }
         }
     }
