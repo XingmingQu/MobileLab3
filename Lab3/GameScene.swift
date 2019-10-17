@@ -21,7 +21,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var livesLabel = SKLabelNode()
     var gameOverLabel = SKLabelNode()
     var gameWonLabel = SKLabelNode()
-    
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
     
@@ -153,6 +152,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     {
         timeLeft -= 1
         timerLabel.text = String(timeLeft)
+        
         if timeLeft <= 0 {
             timer?.invalidate()
             timer = nil
@@ -178,6 +178,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                     //Stop the accelerometer
                     manager.stopAccelerometerUpdates()
                 }
+            }
+        }
+        else
+        {
+            //If game won and there's time left, pause and show the left time
+            if (gameWon == true)
+            {
+                timer?.invalidate()
+                print("asdadwdwad")
             }
         }
     }
