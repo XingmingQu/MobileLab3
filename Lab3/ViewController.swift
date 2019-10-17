@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var goalStepLabel: UILabel!
     @IBOutlet weak var goalAchievedStack: UIStackView!
     @IBOutlet weak var goalSlider: UISlider!
+    @IBOutlet weak var introLabel: UILabel!
     
     // --------All the lazy vars---------
     lazy var Activity = ""
@@ -34,6 +35,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.goalAchievedStack.isHidden=true
+        self.introLabel.isHidden=true
+        self.introLabel.text = "A Maze game. You need to move marble to the blackHole in a limited time. You have initial 30s. Passing the goal 100 step gives you one extra second."
         
         
         // set up the montion activity
@@ -59,10 +62,12 @@ class ViewController: UIViewController {
                     self.todayStepNumber=pedData!.numberOfSteps.intValue
                     if(pedData!.numberOfSteps.intValue>Int(self.goalSlider.value)){
                         self.goalAchievedStack.isHidden=false
+                        self.introLabel.isHidden=false
                         
                     }
                     else{
                         self.goalAchievedStack.isHidden=true
+                        self.introLabel.isHidden=true
                     }
                 }
             }
