@@ -125,7 +125,7 @@
         <!--GameViewController-->
         <scene sceneID="xP0-rW-zop">
             <objects>
-                <viewController id="NoK-ap-aeE" userLabel="GameViewController" customClass="GameViewController" customModule="Lab3" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameStoryBoard" id="NoK-ap-aeE" userLabel="GameViewController" customClass="GameViewController" customModule="Lab3" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cUV-Jn-zdu" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

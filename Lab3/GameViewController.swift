@@ -11,6 +11,8 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
+    
+    var incentivizeTime=0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,7 @@ class GameViewController: UIViewController {
                 // Copy gameplay related content over to the scene
                 sceneNode.entities = scene.entities
                 sceneNode.graphs = scene.graphs
+                sceneNode.timeLeft=incentivizeTime
                 
                 // Set the scale mode to scale to fit the window
                 sceneNode.scaleMode = .aspectFill

@@ -20,9 +20,9 @@ class ViewController: UIViewController {
     
     // --------All the lazy vars---------
     lazy var Activity = ""
-    lazy var stepsOfToday = 0
     lazy var numStepsYesterday = 0
     lazy var goalSteps = 0
+    lazy var todayStepNumber=0
     
     //---------All the  CM things -------------
     let pedometer = CMPedometer()
@@ -56,6 +56,7 @@ class ViewController: UIViewController {
                 (pedData: CMPedometerData?, error: Error?) -> Void in
                 DispatchQueue.main.async{
                     self.todayStepLabel.text="Steps of Today: "+String(pedData!.numberOfSteps.intValue)
+                    self.todayStepNumber=pedData!.numberOfSteps.intValue
                     if(pedData!.numberOfSteps.intValue>Int(self.goalSlider.value)){
                         self.goalAchievedStack.isHidden=false
                         
@@ -102,5 +103,34 @@ class ViewController: UIViewController {
         }
         return "Unknown"
     }
+    
+//    @IBAction func playGameButton(_ sender: UIButton) {
+//        print("dasdasdsa")
+//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.destination is GameViewController
+        {
+            let vc = segue.destination as? GameViewController
+
+//            let todayStepNumber = Float(todayStepNumber)!
+            let goalNumber = self.goalSlider.value
+            
+            let exceed = Int((Float(self.todayStepNumber) - goalNumber)/100)
+            vc?.incentivizeTime = 30+exceed
+//
+//            if let text = self.todayStepLabel.text, let todayStep = Float(text)
+//             {
+//                let exceed = Int((todayStep - goalNumber)/100)
+//                 vc?.incentivizeTime = 30+exceed
+//             }
+//            else{
+//                 vc?.incentivizeTime = 60
+//            }
+            
+        }
+    }
+    
+//    override func prep
 }
 

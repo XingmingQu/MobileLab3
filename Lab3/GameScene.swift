@@ -11,6 +11,7 @@ import GameplayKit
 import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate{
+//    public var TIMELEFT;
     
     //This framework holds functions for accessing gyrometer and other utilities of iphone
     let manager = CMMotionManager()
